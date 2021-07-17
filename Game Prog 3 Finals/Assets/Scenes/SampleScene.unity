@@ -3256,7 +3256,7 @@ MonoBehaviour:
   rb: {fileID: 976517464}
   minimumpower: {x: -16, y: -16}
   maximumpower: {x: 16, y: 16}
-  line: {fileID: 0}
+  line: {fileID: 976517465}
 --- !u!212 &976517461
 SpriteRenderer:
   m_ObjectHideFlags: 0
