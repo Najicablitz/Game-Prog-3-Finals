@@ -7,7 +7,7 @@ public class BallDrag : MonoBehaviour
     public Transform Player;
     public float _ballPower;
     public Rigidbody2D rb;
-
+    
     public Vector2 minimumpower;
     public Vector2 maximumpower;
     public LineRenderer line;
@@ -32,7 +32,8 @@ public class BallDrag : MonoBehaviour
         if(ground == true)
         {
             Movement();
-        }       
+        }
+        
     }
     public void Movement()
     {
@@ -77,11 +78,20 @@ public class BallDrag : MonoBehaviour
         {
             ground = true;
         }
+        if (collision.gameObject.CompareTag("floor"))
+        {
+            ground = true;
+        }
+
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Platform"))
+        {
+            ground = false;
+        }
+        if (collision.gameObject.CompareTag("floor"))
         {
             ground = false;
         }

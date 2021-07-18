@@ -34,7 +34,6 @@ public class Attach : MonoBehaviour
         if (other.gameObject.CompareTag("Platform"))
         {
             player.transform.parent = other.gameObject.transform;
-
         }
     }
 

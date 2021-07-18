@@ -7,12 +7,11 @@ public class Bullet : MonoBehaviour
 
 	float moveSpeed = 50f;
 
-	Rigidbody2D rb;
-
-	BallDrag target;
+	private Rigidbody2D rb;
+	private BallDrag target;
 	Vector2 moveDirection;
 
-	// Use this for initialization
+	
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
