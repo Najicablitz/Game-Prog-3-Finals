@@ -11,10 +11,11 @@ public class BallDrag : MonoBehaviour
     public Vector2 minimumpower;
     public Vector2 maximumpower;
     public LineRenderer line;
-    Camera camera;
+    private Camera camera;
     Vector2 _ballForce;
     Vector2 startpoint;
     Vector2 endpoint;
+    public bool ground;
 
     private void Awake()
     {
@@ -28,24 +29,29 @@ public class BallDrag : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(ground == true)
+        {
+            Movement();
+        }       
+    }
+    public void Movement()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             startpoint = /*Player.position;*/  camera.ScreenToWorldPoint(Input.mousePosition);
-            //startpoint.z = 10;
         }
         if (Input.GetMouseButton(0))
         {
             Vector2 currentpoint = camera.ScreenToWorldPoint(Input.mousePosition);
-           // currentpoint.z = 10;
+
             Drawline(startpoint/*Player.position*/, currentpoint);
         }
         if (Input.GetMouseButtonUp(0))
         {
             endpoint = camera.ScreenToWorldPoint(Input.mousePosition);
-           // endpoint.z = 10;
 
             _ballForce = new Vector2(Mathf.Clamp(startpoint.x - endpoint.x, minimumpower.x, maximumpower.x),
-                                     Mathf.Clamp( startpoint.y - endpoint.y, minimumpower.y, maximumpower.y));
+                                     Mathf.Clamp(startpoint.y - endpoint.y, minimumpower.y, maximumpower.y));
             rb.AddForce(_ballForce * _ballPower, ForceMode2D.Impulse);
             Debug.Log(_ballForce * _ballPower);
             endline();
@@ -64,6 +70,25 @@ public class BallDrag : MonoBehaviour
     {
         line.positionCount = 0;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            ground = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            ground = false;
+        }
+    }
+
+
+   
 
 
 }
