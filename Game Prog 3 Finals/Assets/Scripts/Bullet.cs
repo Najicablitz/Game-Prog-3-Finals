@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
-	float moveSpeed = 50f;
+	float moveSpeed = 100f;
 
 	private Rigidbody2D rb;
 	private BallDrag target;

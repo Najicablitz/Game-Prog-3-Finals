@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        fireRate = 1f;
+        
         nextFire = Time.time;
     }
 
@@ -31,10 +31,11 @@ public class Enemy : MonoBehaviour
 
     public void CheckFire()
     {
-        if(Time.time > nextFire)
+        if(Time.time >= nextFire)
         {
             Instantiate(bullet, transform.position, Quaternion.identity);
             nextFire = Time.time + fireRate;
         }
+        
     }
 }
