@@ -5,18 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Gamemanager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Load_Game()
     {
         SceneManager.LoadScene("MainGame");

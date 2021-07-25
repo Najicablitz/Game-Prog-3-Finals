@@ -4,34 +4,29 @@ using UnityEngine;
 
 public class Disappear : MonoBehaviour
 {
-    public float cycle;
-    public float current = 0f;
-    public GameObject platform;
-
-    void Start()
-    {
-        
-    }
+    public float _cycle;
+    public float _current = 0f;
+    public GameObject _platform;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        current += Time.deltaTime;
+        _current += Time.deltaTime;
 
-            if (current >= cycle)
+            if (_current >= _cycle)
             {
 
-                if (platform.gameObject.activeSelf)
+                if (_platform.gameObject.activeSelf)
                 {
                     Debug.Log("non-active");
-                    platform.gameObject.SetActive(false);
-                    current = 0f;
+                    _platform.gameObject.SetActive(false);
+                    _current = 0f;
                 }
                 else
                 {
                     Debug.Log("active");
-                    platform.gameObject.SetActive(true);
-                    current = 0f;
+                    _platform.gameObject.SetActive(true);
+                    _current = 0f;
                 }
                 
             }

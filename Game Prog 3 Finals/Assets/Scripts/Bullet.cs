@@ -5,19 +5,19 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
-	float moveSpeed = 100f;
+	public float _moveSpeed = 100f;
 
-	private Rigidbody2D rb;
-	private BallDrag target;
-	Vector2 moveDirection;
+	private Rigidbody2D _rb;
+	private BallDrag _target;
+	Vector2 _moveDirection;
 
 	
 	void Start()
 	{
-		rb = GetComponent<Rigidbody2D>();
-		target = GameObject.FindObjectOfType<BallDrag>();
-		moveDirection = (target.transform.position - transform.position).normalized * moveSpeed;
-		rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
+		_rb = GetComponent<Rigidbody2D>();
+		_target = GameObject.FindObjectOfType<BallDrag>();
+		_moveDirection = (_target.transform.position - transform.position).normalized * _moveSpeed;
+		_rb.velocity = new Vector2(_moveDirection.x, _moveDirection.y);
 		Destroy(gameObject, 3f);
 	}
 

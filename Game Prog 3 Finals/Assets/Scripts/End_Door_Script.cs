@@ -4,25 +4,13 @@ using UnityEngine;
 
 public class End_Door_Script : MonoBehaviour
 {
-    public GameObject win;
-   
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public GameObject _win;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            win.SetActive(true);
+            _win.SetActive(true);
             Time.timeScale = 0;
         }
     }

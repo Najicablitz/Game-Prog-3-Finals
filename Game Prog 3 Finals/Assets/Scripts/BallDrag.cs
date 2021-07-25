@@ -4,32 +4,36 @@ using UnityEngine;
 
 public class BallDrag : MonoBehaviour
 {
-    public Transform Player;
+   
     public float _ballPower;
-    public Rigidbody2D rb;
+    public Rigidbody2D _rb;
     
-    public Vector2 minimumpower;
-    public Vector2 maximumpower;
-    public LineRenderer line;
-    private Camera camera;
+    public Vector2 _minimumpower;
+    public Vector2 _maximumpower;
+    public LineRenderer _line;
+    public Camera _camera;
+
     Vector2 _ballForce;
-    Vector2 startpoint;
-    Vector2 endpoint;
-    public bool ground;
+    Vector2 _startpoint;
+    Vector2 _endpoint;
+    Vector2 _currentpoint;
+
+    private bool _ground;
+    public AudioClip _sfx;
 
     private void Awake()
     {
-        line = GetComponent<LineRenderer>();
+        _line = GetComponent<LineRenderer>();
     }
     void Start()
     {
-        camera = Camera.main;
+        _camera = Camera.main;
     }
 
-    // Update is called once per frame
+  
     void Update()
     {
-        if(ground == true)
+        if(_ground == true)
         {
             Movement();
         }
@@ -39,48 +43,49 @@ public class BallDrag : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            startpoint = /*Player.position;*/  camera.ScreenToWorldPoint(Input.mousePosition);
+            _startpoint = _camera.ScreenToWorldPoint(Input.mousePosition);
         }
         if (Input.GetMouseButton(0))
         {
-            Vector2 currentpoint = camera.ScreenToWorldPoint(Input.mousePosition);
+            _currentpoint = _camera.ScreenToWorldPoint(Input.mousePosition);
 
-            Drawline(startpoint/*Player.position*/, currentpoint);
+            Drawline(_startpoint, _currentpoint);
         }
         if (Input.GetMouseButtonUp(0))
         {
-            endpoint = camera.ScreenToWorldPoint(Input.mousePosition);
+            _endpoint = _camera.ScreenToWorldPoint(Input.mousePosition);
 
-            _ballForce = new Vector2(Mathf.Clamp(startpoint.x - endpoint.x, minimumpower.x, maximumpower.x),
-                                     Mathf.Clamp(startpoint.y - endpoint.y, minimumpower.y, maximumpower.y));
-            rb.AddForce(_ballForce * _ballPower, ForceMode2D.Impulse);
+            _ballForce = new Vector2(Mathf.Clamp(_startpoint.x - _endpoint.x, _minimumpower.x, _maximumpower.x),
+                                     Mathf.Clamp(_startpoint.y - _endpoint.y, _minimumpower.y, _maximumpower.y));
+            _rb.AddForce(_ballForce * _ballPower, ForceMode2D.Impulse);
             Debug.Log(_ballForce * _ballPower);
             endline();
+            AudioManager.instance.GUISFX(_sfx);
         }
     }
 
     public void Drawline(Vector3 startpoint, Vector3 endpoint)
     {
-        line.positionCount = 2;
+        _line.positionCount = 2;
         Vector3[] Allpoint = new Vector3[2];
         Allpoint[0] = startpoint;
         Allpoint[1] = endpoint;
-        line.SetPositions(Allpoint);
+        _line.SetPositions(Allpoint);
     }
     public void endline()
     {
-        line.positionCount = 0;
+        _line.positionCount = 0;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
-            ground = true;
+            _ground = true;
         }
         if (collision.gameObject.CompareTag("floor"))
         {
-            ground = true;
+            _ground = true;
         }
 
     }
@@ -89,11 +94,11 @@ public class BallDrag : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
-            ground = false;
+            _ground = false;
         }
         if (collision.gameObject.CompareTag("floor"))
         {
-            ground = false;
+            _ground = false;
         }
     }
 
