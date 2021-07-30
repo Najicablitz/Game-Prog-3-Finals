@@ -28,16 +28,16 @@ public class BallDrag : MonoBehaviour
     void Start()
     {
         _camera = Camera.main;
+        Time.timeScale = 1;
     }
 
 
     void Update()
     {
-        if (_ground == true)
+        if (_ground == true && Time.timeScale == 1)
         {
             Movement();
         }
-
     }
     public void Movement()
     {
@@ -62,6 +62,7 @@ public class BallDrag : MonoBehaviour
             endline();
             AudioManager.instance.GUISFX(_sfx);
         }
+        
     }
 
     public void Drawline(Vector3 startpoint, Vector3 endpoint)
@@ -90,7 +91,7 @@ public class BallDrag : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("floor"))
         {
-            _ground = false;
+            _ground = false;            
         }
     }
 
