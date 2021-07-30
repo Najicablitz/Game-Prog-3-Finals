@@ -5,7 +5,6 @@ using UnityEngine;
 public class CamerFollow : MonoBehaviour
 {
     public Transform _player;
-    //public float smoothspeed = 0.125f;
     public Vector3 _offset;
 
     private void FixedUpdate()

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BallDrag : MonoBehaviour
 {
-   
+
     public float _ballPower;
     public Rigidbody2D _rb;
-    
+
     public Vector2 _minimumpower;
     public Vector2 _maximumpower;
     public LineRenderer _line;
@@ -30,14 +30,14 @@ public class BallDrag : MonoBehaviour
         _camera = Camera.main;
     }
 
-  
+
     void Update()
     {
-        if(_ground == true)
+        if (_ground == true)
         {
             Movement();
         }
-        
+
     }
     public void Movement()
     {
@@ -79,11 +79,7 @@ public class BallDrag : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Platform"))
-        {
-            _ground = true;
-        }
-        if (collision.gameObject.CompareTag("floor"))
+        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("floor"))
         {
             _ground = true;
         }
@@ -92,11 +88,7 @@ public class BallDrag : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Platform"))
-        {
-            _ground = false;
-        }
-        if (collision.gameObject.CompareTag("floor"))
+        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("floor"))
         {
             _ground = false;
         }

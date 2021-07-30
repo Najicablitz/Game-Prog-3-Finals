@@ -12,19 +12,19 @@ public class Gamemanager : MonoBehaviour
 
     public void Menu()
     {
-        Debug.Log("Load Menu");
+        
         SceneManager.LoadScene("MainMenu");
     }
 
     public void Credits()
     {
-        Debug.Log("Load Menu");
+        
         SceneManager.LoadScene("Credits");
     }
 
     public void ExitGame()
     {
-        Debug.Log("Exit Game");
+        
         Application.Quit();
     }
 }
